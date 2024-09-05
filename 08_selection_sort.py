@@ -51,9 +51,36 @@ def selection_sort(lista):
 
 ##################################################################
 
-nums = [7, 9, 5, 4, 0, 3, 8, 1, 6, 2]
+# nums = [7, 9, 5, 4, 0, 3, 8, 1, 6, 2]
+
+# Pior caso
+nums = [9, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+# Melhor caso
+nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 print("ANTES: ", nums)
 selection_sort(nums)
 print("DEPOIS:", nums)
 print(f"Comparações: {comps}; trocas: {trocas}; passadas: {passd}")
+
+##############################################################
+
+from time import time
+
+import sys
+sys.dont_write_bytecode = True      # Impede a criação do cache
+
+# TESTES COM A LISTA DE NOMES
+from data.nomes_desord import nomes
+
+# Recortando os 100k primeiros nomes
+nomes = nomes[:100000]
+
+hora_ini = time()
+selection_sort(nomes)
+hora_fim = time()
+
+print(nomes)
+print(f"Comparações: {comps}; trocas: {trocas}; passadas: {passd}")
+print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000}ms\n")
