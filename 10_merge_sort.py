@@ -84,7 +84,7 @@ print(f"Divisões: {divs}, junções: {juncs}, comparações: {comps}")
 
 from time import time
 
-import sys
+import sys, tracemalloc
 sys.dont_write_bytecode = True      # Impede a criação do cache
 
 # TESTES COM A LISTA DE NOMES
@@ -93,12 +93,19 @@ from data.nomes_desord import nomes
 # Recortando os 100k primeiros nomes
 # nomes = nomes[:100000]
 
+divs = juncs = comps = 0
+
+tracemalloc.start()     # Inicia medição do consumo de memória
 hora_ini = time()
 nomes_ord = merge_sort(nomes)
 hora_fim = time()
 
-divs = juncs = comps = 0
+# Captura as informações do gasto de memória
+mem_atual, mem_pico = tracemalloc.get_traced_memory()
+tracemalloc.stop()      # Termina a medição da memória
+
 print(nomes_ord)
 print(f"Divisões: {divs}, junções: {juncs}, comparações: {comps}")
 print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000}ms\n")
+print(f"Pico de memória: { mem_pico / 1024 / 1024 } MB")
 
