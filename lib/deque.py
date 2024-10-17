@@ -35,3 +35,21 @@ class Deque:
         if self.is_empty():
             raise Exception("ERRO: impossível remover de um deque vazio.")
         return self.__data.pop()
+    
+    def peek(self, front = True):
+        """
+        Método que consulta um elemento do deque sem removê-lo.
+        Se o parâmetro 'front' for True (ou tiver sido omitido),
+        será retornado o primeiro elemento.
+        Caso contrário, será retornado o último elemento.
+        """
+        if self.is_empty():
+            raise Exception("ERRO: impossível consultar um deque vazio.")
+        if front: return self.__data[0]
+        else: return self.__data[-1]
+
+    def __str__(self):
+        """ Retorna uma representação do deque como string """
+        return str(self.__data)
+    
+#############################################################################
